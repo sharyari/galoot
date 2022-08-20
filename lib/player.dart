@@ -25,6 +25,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       "kattbak1.png",
       "kattbak2.png",
       "kattbak3.png",
+      "kattfram1.png",
+      "kattfram2.png",
+      "kattfram3.png",
     ]);
     animations = {
       PlayerState.side: SpriteAnimation.spriteList(
@@ -50,6 +53,15 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         ],
         stepTime: 0.2,
       ),
+      PlayerState.down: SpriteAnimation.spriteList(
+        [
+          Sprite(Flame.images.fromCache("kattfram3.png")),
+          Sprite(Flame.images.fromCache("kattfram1.png")),
+          Sprite(Flame.images.fromCache("kattfram3.png")),
+          Sprite(Flame.images.fromCache("kattfram2.png"))
+        ],
+        stepTime: 0.2,
+      )
     };
   }
 
@@ -67,4 +79,5 @@ enum PlayerState {
   idle,
   up,
   side,
+  down,
 }
