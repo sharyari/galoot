@@ -55,6 +55,9 @@ flutter:
     - assets/images/kattfram1.png
     - assets/images/kattfram2.png
     - assets/images/kattfram3.png
+    - assets/images/nykatt1.png
+    - assets/images/nykatt2.png
+    - assets/images/nykatt3.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
