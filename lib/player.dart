@@ -1,11 +1,14 @@
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/collisions.dart';
 
 class Player extends SpriteAnimationGroupComponent<PlayerState> {
-  Player() : super(size: Vector2(200, 200));
-
+  final JoystickComponent joystick;
+  Player(this.joystick) : super(size: Vector2(200, 200));
   @override
   Future<void> onLoad() async {
+    size = Vector2(20, 20);
+    add(RectangleHitbox());
     current = PlayerState.up;
     await Flame.images.loadAll([
       "katt1.png",
@@ -40,6 +43,14 @@ class Player extends SpriteAnimationGroupComponent<PlayerState> {
         stepTime: 0.2,
       ),
     };
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    if (!joystick.delta.isZero()) {
+      position.add(joystick.delta);
+    }
   }
 }
 
