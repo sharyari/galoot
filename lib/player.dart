@@ -4,6 +4,9 @@ import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
 import 'package:flame_audio/audio_pool.dart';
+import 'package:galoot/level.dart';
+
+import 'dart:math';
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with CollisionCallbacks, Tappable {
@@ -11,6 +14,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   late AudioPool mjau1;
   late AudioPool mjau2;
   late AudioPool angry;
+  late Random rng = Random();
 
   Player(Vector2 pos) : super(size: Vector2(200, 200)) {
     position = pos;
@@ -23,9 +27,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     add(RectangleHitbox(size: Vector2(15, 15)));
     current = PlayerState.idle;
     children.register<MoveByEffect>();
-    mjau1 = await AudioPool.create('audio/default_mjau.mp3', maxPlayers: 1);
-    mjau2 = await AudioPool.create('audio/default_mjau2.mp3', maxPlayers: 1);
-    angry = await AudioPool.create('audio/arg_mjau.mp3', maxPlayers: 1);
+    mjau1 = await AudioPool.create('audio/default_mjau.mp3', maxPlayers: 10);
+    mjau2 = await AudioPool.create('audio/default_mjau2.mp3', maxPlayers: 10);
+    angry = await AudioPool.create('audio/arg_mjau.mp3', maxPlayers: 10);
 
     await Flame.images.loadAll([
       "katt1.png",
@@ -82,47 +86,58 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     Vector2 direction = clickPos - position;
     void onComplete() =>
         {lastPosition = position.clone(), current = PlayerState.idle};
-    if (children.query<MoveByEffect>().length == 0) {
-      if (direction.x.abs() > direction.y.abs()) {
-        if (direction.x > 0) {
-          add(MoveByEffect(
-            Vector2(16, 0),
-            EffectController(duration: 0.4),
-            onComplete: onComplete,
-          )); // right
-          current = PlayerState.side;
-          if (!isFlippedHorizontally) {
-            flipHorizontallyAroundCenter();
-          }
-        } else {
-          add(MoveByEffect(
-            Vector2(-16, 0),
-            EffectController(duration: 0.4),
-            onComplete: onComplete,
-          )); // right
-          current = PlayerState.side;
-          if (isFlippedHorizontally) {
-            flipHorizontallyAroundCenter();
-          }
+    if (children.query<MoveByEffect>().length > 0) {
+      return;
+    }
+    if (direction.x.abs() > direction.y.abs()) {
+      if (direction.x > 0) {
+        add(MoveByEffect(
+          Vector2(16, 0),
+          EffectController(duration: 0.4),
+          onComplete: onComplete,
+        )); // right
+        current = PlayerState.side;
+        if (!isFlippedHorizontally) {
+          flipHorizontallyAroundCenter();
         }
       } else {
-        if (direction.y > 0) {
-          add(MoveByEffect(
-            Vector2(0, 16),
-            EffectController(duration: 0.4),
-            onComplete: onComplete,
-          )); // right
-          current = PlayerState.down;
-        } else {
-          add(MoveByEffect(
-            Vector2(0, -16),
-            EffectController(duration: 0.4),
-            onComplete: onComplete,
-          )); // right
-          current = PlayerState.up;
+        add(MoveByEffect(
+          Vector2(-16, 0),
+          EffectController(duration: 0.4),
+          onComplete: onComplete,
+        )); // right
+        current = PlayerState.side;
+        if (isFlippedHorizontally) {
+          flipHorizontallyAroundCenter();
         }
       }
+    } else {
+      if (direction.y > 0) {
+        add(MoveByEffect(
+          Vector2(0, 16),
+          EffectController(duration: 0.4),
+          onComplete: onComplete,
+        )); // right
+        current = PlayerState.down;
+      } else {
+        add(MoveByEffect(
+          Vector2(0, -16),
+          EffectController(duration: 0.4),
+          onComplete: onComplete,
+        )); // right
+        current = PlayerState.up;
+      }
     }
+  }
+
+  @override
+  bool onTapDown(TapDownInfo info) {
+    if (rng.nextBool()) {
+      mjau1.start();
+    } else {
+      mjau2.start();
+    }
+    return true;
   }
 
   @override
@@ -130,6 +145,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     Set<Vector2> intersectionPoint,
     PositionComponent other,
   ) {
+    if (other is Level) {
+      return;
+    }
     super.onCollisionStart(intersectionPoint, other);
     children.query<MoveByEffect>().forEach((effect) {
       effect.removeFromParent();

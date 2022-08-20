@@ -19,9 +19,9 @@ class GalootGame extends FlameGame
   Future<void> onLoad() async {
 //    debugMode = true;
     camera.zoom = 2.0;
-    player = Player(Vector2(64, 64));
+    player = Player(Vector2(25 * 16, 10 * 16));
     add(player);
-    add(BlueLevel());
+    change_level(BWLevel(), Vector2(10 * 16, 25 * 16));
     camera.followComponent(player);
     add(TextPrompt("Hello world!", color: Colors.white, top: false));
   }
@@ -30,5 +30,10 @@ class GalootGame extends FlameGame
   void onTapDown(int _pointerId, TapDownInfo info) {
     super.onTapDown(_pointerId, info);
     player.move(info.eventPosition.game);
+  }
+
+  void change_level(Level level, Vector2 position) {
+    add(level);
+    player.position = position;
   }
 }
