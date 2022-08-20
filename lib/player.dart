@@ -1,15 +1,23 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
-import 'package:flame/collisions.dart';
+import 'package:flame/input.dart';
 
-class Player extends SpriteAnimationGroupComponent<PlayerState> {
-  final JoystickComponent joystick;
-  Player(this.joystick) : super(size: Vector2(200, 200));
+class Player extends SpriteAnimationGroupComponent<PlayerState>
+    with CollisionCallbacks, Tappable {
+  late Vector2 lastPosition;
+
+  Player(Vector2 pos) : super(size: Vector2(200, 200)) {
+    position = pos;
+    lastPosition = pos;
+  }
+
   @override
   Future<void> onLoad() async {
-    size = Vector2(20, 20);
+    size = Vector2(16, 16);
     add(RectangleHitbox());
     current = PlayerState.up;
+
     await Flame.images.loadAll([
       "katt1.png",
       "katt2.png",
@@ -46,11 +54,12 @@ class Player extends SpriteAnimationGroupComponent<PlayerState> {
   }
 
   @override
-  void update(double dt) {
-    super.update(dt);
-    if (!joystick.delta.isZero()) {
-      position.add(joystick.delta);
-    }
+  void onCollisionStart(
+    Set<Vector2> intersectionPoint,
+    PositionComponent other,
+  ) {
+    super.onCollisionStart(intersectionPoint, other);
+    position = lastPosition;
   }
 }
 
