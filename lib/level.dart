@@ -13,8 +13,7 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
   final String map;
   final String library;
   final Color color;
-  Level(this.map, this.library, Vector2 size, this.color)
-      : super(size: size, position: Vector2(0, 0));
+  Level(this.map, this.library, this.color) : super(position: Vector2(0, 0));
 
   @override
   Future<void> onLoad() async {
@@ -25,9 +24,9 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
       pixelSize: 1,
     );
 
-    startBgmMusic();
+//    startBgmMusic();
 
-    gameRef.camera.worldBounds = gameRef.size.toRect();
+//    gameRef.camera.worldBounds = size.toRect();
 
     final miniMap = MiniMap.fromDataString(map);
     for (final entry in miniMap.objects.entries) {
@@ -57,9 +56,13 @@ class BlueLevel extends Level {
       : super(
           blueWorld,
           collection,
-          Vector2(10 * 16, 35 * 16),
           Colors.blue,
         );
+  @override
+  Future<void> onLoad() async {
+    size = Vector2(10 * 16, 35 * 16);
+    super.onLoad();
+  }
 }
 
 class RedLevel extends Level {
@@ -67,9 +70,13 @@ class RedLevel extends Level {
       : super(
           redWorld,
           collection,
-          Vector2(20 * 16, 30 * 16),
           Colors.red,
         );
+  @override
+  Future<void> onLoad() async {
+    size = Vector2(20 * 16, 30 * 16);
+    super.onLoad();
+  }
 }
 
 class GreenLevel extends Level {
@@ -77,9 +84,13 @@ class GreenLevel extends Level {
       : super(
           greenWorld,
           collection,
-          Vector2(20 * 16, 30 * 16),
           Colors.green,
         );
+  @override
+  Future<void> onLoad() async {
+    size = Vector2(20 * 16, 30 * 16);
+    super.onLoad();
+  }
 }
 
 void startBgmMusic() {
@@ -92,9 +103,14 @@ class BWLevel extends Level with CollisionCallbacks {
       : super(
           blackWhiteWorld,
           collection,
-          Vector2(20 * 16, 30 * 16),
           Colors.white,
         );
+
+  @override
+  Future<void> onLoad() async {
+    size = Vector2(20 * 16, 30 * 16);
+    super.onLoad();
+  }
 
   @override
   void onCollisionStart(
@@ -102,9 +118,9 @@ class BWLevel extends Level with CollisionCallbacks {
     PositionComponent other,
   ) {
     super.onCollisionStart(intersectionPoint, other);
-    if (other.position.y >= 16 * 16) {
-      this.removeFromParent();
-      gameRef.change_level(BlueLevel(), Vector2(5 * 16, 0)); // Todo
+    if (other.position.y >= 19 * 16) {
+      removeFromParent();
+      gameRef.changeLevel(BlueLevel(), Vector2(5 * 16, 0)); // Todo
     }
   }
 }

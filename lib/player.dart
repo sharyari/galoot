@@ -4,6 +4,7 @@ import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
 import 'package:flame_audio/audio_pool.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:galoot/level.dart';
 
 import 'dart:math';
@@ -11,14 +12,18 @@ import 'dart:math';
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with CollisionCallbacks, Tappable {
   late Vector2 lastPosition;
-  late AudioPool mjau1;
+  late final AudioPool mjau1;
   late AudioPool mjau2;
   late AudioPool angry;
   late Random rng = Random();
 
-  Player(Vector2 pos) : super(size: Vector2(200, 200)) {
-    position = pos;
+  Player(Vector2 pos) : super(size: Vector2(200, 200), anchor: Anchor.center) {
+    setPosition(pos);
     lastPosition = pos;
+  }
+
+  void setPosition(Vector2 position) {
+    this.position = position + Vector2(8, 8);
   }
 
   @override
@@ -27,7 +32,11 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     add(RectangleHitbox(size: Vector2(15, 15)));
     current = PlayerState.idle;
     children.register<MoveByEffect>();
-    mjau1 = await AudioPool.create('audio/default_mjau.mp3', maxPlayers: 10);
+    mjau1 = await FlameAudio.createPool(
+      'default_mjau.mp3',
+      minPlayers: 3,
+      maxPlayers: 10,
+    );
     mjau2 = await AudioPool.create('audio/default_mjau2.mp3', maxPlayers: 10);
     angry = await AudioPool.create('audio/arg_mjau.mp3', maxPlayers: 10);
 
