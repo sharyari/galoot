@@ -3,7 +3,6 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
-
 import 'package:flame_audio/audio_pool.dart';
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
@@ -38,19 +37,23 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       "kattfram1.png",
       "kattfram2.png",
       "kattfram3.png",
+      "nykatt1.png",
+      "nykatt2.png",
+      "nykatt3.png",
     ]);
     animations = {
       PlayerState.side: SpriteAnimation.spriteList(
         [
-          Sprite(Flame.images.fromCache("katt1.png")),
-          Sprite(Flame.images.fromCache("katt2.png")),
-          Sprite(Flame.images.fromCache("katt3.png")),
+          Sprite(Flame.images.fromCache("nykatt1.png")),
+          Sprite(Flame.images.fromCache("nykatt2.png")),
+          Sprite(Flame.images.fromCache("nykatt1.png")),
+          Sprite(Flame.images.fromCache("nykatt3.png")),
         ],
-        stepTime: 0.2,
+        stepTime: 0.3,
       ),
       PlayerState.idle: SpriteAnimation.spriteList(
         [
-          Sprite(Flame.images.fromCache("katt1.png")),
+          Sprite(Flame.images.fromCache("nykatt1.png")),
         ],
         stepTime: 0.2,
       ),
@@ -88,6 +91,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
             onComplete: onComplete,
           )); // right
           current = PlayerState.side;
+          if (!isFlippedHorizontally) {
+            flipHorizontallyAroundCenter();
+          }
         } else {
           add(MoveByEffect(
             Vector2(-16, 0),
@@ -95,6 +101,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
             onComplete: onComplete,
           )); // right
           current = PlayerState.side;
+          if (isFlippedHorizontally) {
+            flipHorizontallyAroundCenter();
+          }
         }
       } else {
         if (direction.y > 0) {
