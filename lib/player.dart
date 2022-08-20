@@ -1,6 +1,6 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
-import 'package:flame/collisions.dart';
 
 class Player extends SpriteAnimationGroupComponent<PlayerState> {
   final JoystickComponent joystick;
@@ -9,7 +9,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState> {
   Future<void> onLoad() async {
     size = Vector2(20, 20);
     add(RectangleHitbox());
-    current = PlayerState.up;
+    current = PlayerState.down;
     await Flame.images.loadAll([
       "katt1.png",
       "katt2.png",
@@ -17,6 +17,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState> {
       "kattbak1.png",
       "kattbak2.png",
       "kattbak3.png",
+      "kattfram1.png",
+      "kattfram2.png",
+      "kattfram3.png",
     ]);
     animations = {
       PlayerState.side: SpriteAnimation.spriteList(
@@ -42,6 +45,15 @@ class Player extends SpriteAnimationGroupComponent<PlayerState> {
         ],
         stepTime: 0.2,
       ),
+      PlayerState.down: SpriteAnimation.spriteList(
+        [
+          Sprite(Flame.images.fromCache("kattfram3.png")),
+          Sprite(Flame.images.fromCache("kattfram1.png")),
+          Sprite(Flame.images.fromCache("kattfram3.png")),
+          Sprite(Flame.images.fromCache("kattfram2.png"))
+        ],
+        stepTime: 0.2,
+      )
     };
   }
 
@@ -58,4 +70,5 @@ enum PlayerState {
   idle,
   up,
   side,
+  down,
 }
