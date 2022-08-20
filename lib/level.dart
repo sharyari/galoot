@@ -33,7 +33,9 @@ class Level extends Component {
                 sprite.image.width.toDouble(),
                 sprite.image.height.toDouble(),
               ),
-            )..add(RectangleHitbox()..collisionType = CollisionType.passive),
+            )..add(RectangleHitbox(
+                size: Vector2(15, 15),
+              )..collisionType = CollisionType.passive),
           ),
         );
       }
@@ -43,4 +45,8 @@ class Level extends Component {
 
 class BlueLevel extends Level {
   BlueLevel() : super(blueWorld, collection);
+}
+
+class BWLevel extends Level {
+  BWLevel() : super(world, collection);
 }

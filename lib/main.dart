@@ -16,16 +16,16 @@ class GalootGame extends FlameGame
   late Player player;
   @override
   Future<void> onLoad() async {
-    debugMode = true;
+//    debugMode = true;
     camera.zoom = 2.0;
     player = Player(Vector2(64, 64));
     add(player);
-    add(BlueLevel());
+    add(BWLevel());
   }
 
   @override
   void onTapDown(int _pointerId, TapDownInfo info) {
     super.onTapDown(_pointerId, info);
-    player.move(info.eventPosition);
+    player.move(info.eventPosition.game);
   }
 }
