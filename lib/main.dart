@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:flame/effects.dart';
+import 'package:flame/input.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -11,28 +11,21 @@ void main() {
   runApp(GameWidget(game: GalootGame()));
 }
 
-Future<JoystickComponent> getJoystick() async {
-  return JoystickComponent(
-      knob: SpriteComponent(
-        sprite: Sprite(await Flame.images.load('knob.png')),
-        size: Vector2.all(70),
-      ),
-      background: SpriteComponent(
-        sprite: Sprite(await Flame.images.load('knob_bg.png')),
-        size: Vector2.all(150),
-      ),
-      margin: const EdgeInsets.only(left: 40, bottom: 40));
-}
-
-class GalootGame extends FlameGame with HasCollisionDetection, HasDraggables {
-  late JoystickComponent joystick;
+class GalootGame extends FlameGame
+    with HasCollisionDetection, HasDraggables, HasTappables {
+  late Player player;
   @override
   Future<void> onLoad() async {
-    debugMode = true;
+//    debugMode = true;
     camera.zoom = 2.0;
-    joystick = await getJoystick();
-    add(Player(joystick));
-    add(joystick);
-    add(Level(world, collection));
+    player = Player(Vector2(64, 64));
+    add(player);
+    add(BWLevel());
+  }
+
+  @override
+  void onTapDown(int _pointerId, TapDownInfo info) {
+    super.onTapDown(_pointerId, info);
+    player.move(info.eventPosition.game);
   }
 }

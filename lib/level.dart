@@ -6,6 +6,8 @@ import 'package:flame_mini_sprite/flame_mini_sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
+import 'package:galoot/assets.dart';
+
 class Level extends Component {
   final String map;
   final String library;
@@ -31,10 +33,20 @@ class Level extends Component {
                 sprite.image.width.toDouble(),
                 sprite.image.height.toDouble(),
               ),
-            )..add(RectangleHitbox()),
+            )..add(RectangleHitbox(
+                size: Vector2(15, 15),
+              )..collisionType = CollisionType.passive),
           ),
         );
       }
     }
   }
+}
+
+class BlueLevel extends Level {
+  BlueLevel() : super(blueWorld, collection);
+}
+
+class BWLevel extends Level {
+  BWLevel() : super(world, collection);
 }
