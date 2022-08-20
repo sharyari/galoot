@@ -49,11 +49,11 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
           Sprite(Flame.images.fromCache("nykatt1.png")),
           Sprite(Flame.images.fromCache("nykatt3.png")),
         ],
-        stepTime: 0.6,
+        stepTime: 0.3,
       ),
       PlayerState.idle: SpriteAnimation.spriteList(
         [
-          Sprite(Flame.images.fromCache("katt1.png")),
+          Sprite(Flame.images.fromCache("nykatt1.png")),
         ],
         stepTime: 0.2,
       ),
@@ -92,6 +92,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
             onComplete: onComplete,
           )); // right
           current = PlayerState.side;
+          if (!isFlippedHorizontally) {
+            flipHorizontallyAroundCenter();
+          }
         } else {
           add(MoveByEffect(
             Vector2(-16, 0),
@@ -99,6 +102,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
             onComplete: onComplete,
           )); // right
           current = PlayerState.side;
+          if (isFlippedHorizontally) {
+            flipHorizontallyAroundCenter();
+          }
         }
       } else {
         if (direction.y > 0) {
