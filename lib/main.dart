@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:galoot/assets.dart';
 import 'package:galoot/level.dart';
 import 'package:galoot/player.dart';
+import 'package:galoot/textprompt.dart';
 
 void main() {
   runApp(GameWidget(game: GalootGame()));
@@ -20,7 +21,9 @@ class GalootGame extends FlameGame
     camera.zoom = 2.0;
     player = Player(Vector2(64, 64));
     add(player);
-    add(BWLevel());
+    add(BlueLevel());
+    camera.followComponent(player);
+    add(TextPrompt("Hello world!", color: Colors.white, top: false));
   }
 
   @override

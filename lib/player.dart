@@ -24,9 +24,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     add(RectangleHitbox(size: Vector2(15, 15)));
     current = PlayerState.idle;
     children.register<MoveByEffect>();
-    mjau1 = await AudioPool.create('default_mjau.mp3', maxPlayers: 1);
-    mjau2 = await AudioPool.create('default_mjau2.mp3', maxPlayers: 1);
-    angry = await AudioPool.create('arg_mjau.mp3', maxPlayers: 1);
+    mjau1 = await AudioPool.create('audio/default_mjau.mp3', maxPlayers: 1);
+    mjau2 = await AudioPool.create('audio/default_mjau2.mp3', maxPlayers: 1);
+    angry = await AudioPool.create('audio/arg_mjau.mp3', maxPlayers: 1);
 
     await Flame.images.loadAll([
       "katt1.png",
@@ -80,7 +80,6 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     void onComplete() =>
         {lastPosition = position.clone(), current = PlayerState.idle};
     if (children.query<MoveByEffect>().length == 0) {
-      mjau1.start();
       if (direction.x.abs() > direction.y.abs()) {
         if (direction.x > 0) {
           add(MoveByEffect(
