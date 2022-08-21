@@ -37,10 +37,7 @@ class BWLevel extends Level with CollisionCallbacks {
     final treehouseBottom = miscSprites['treehouse_bottom'];
     final bone = miscSprites['bone'];
     final lumberjack = miscSprites['lumberjack'];
-    final trashcan = miscSprites['trashcan'];
-    if (trashcan != null) {
-      add(Trashcan(trashcan, color, position: Vector2(7 * 16, 16 * 25)));
-    }
+
     if (lumberjack != null) {
       add(Lumberjack(lumberjack, color, position: Vector2(11 * 16, 11 * 16)));
     }
