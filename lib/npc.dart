@@ -35,7 +35,7 @@ class Fish extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        "You found a fish!",
+        "Tasty!! But I'm not hungry, who might want it?",
         color: color,
         top: false,
       ),
@@ -64,7 +64,7 @@ class Trashcan extends Npc with CollisionCallbacks {
     if (gameRef.globs['has_cap'] == false) {
       gameRef.add(
         TextPrompt(
-          "You found a cap!",
+          "A cap! That will keep me warm in the winter",
           color: color,
           top: false,
         ),
@@ -92,7 +92,7 @@ class Bone extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        "You found a bone!",
+        "A bone? Someone must have lost it!",
         color: color,
         top: false,
       ),
