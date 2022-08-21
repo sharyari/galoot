@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:galoot/level.dart';
 import 'package:galoot/npc.dart';
 import 'package:mini_sprite/mini_sprite.dart';
+import 'package:galoot/main.dart';
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with CollisionCallbacks, Tappable {
@@ -161,6 +162,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     if (other is Npc) {
       other.converse();
     }
+
     super.onCollisionStart(intersectionPoint, other);
     children.query<MoveByEffect>().forEach((effect) {
       effect.removeFromParent();

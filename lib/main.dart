@@ -28,6 +28,7 @@ Map<String, bool> initialize_glob_vars() {
 class GalootGame extends FlameGame
     with HasCollisionDetection, HasDraggables, HasTappables {
   late Player player;
+
   Map<String, bool> globs = initialize_glob_vars();
   @override
   Future<void> onLoad() async {
@@ -40,8 +41,7 @@ class GalootGame extends FlameGame
     camera.zoom = 2;
     player = Player(playerCat);
     add(player);
-
-    changeLevel(BWLevel(Vector2(1 * 16, 12 * 16)));
+    changeLevel(BWLevel(Vector2(6 * 16, 8 * 16)));
     camera.followComponent(player);
 //    add(TextPrompt("Hello world!", color: Colors.white, top: false));
   }
