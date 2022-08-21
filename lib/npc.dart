@@ -92,7 +92,7 @@ class Bone extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        "You found a bone!",
+        'You found a bone!',
         color: color,
         top: false,
       ),
@@ -160,26 +160,18 @@ class Grandpa extends Npc with CollisionCallbacks {
 
   @override
   void converse() {
-    if (gameRef.globs['has_bone'] == true) {
-      gameRef.add(TextPrompt(
-        "Good morning",
+    gameRef.add(
+      TextPrompt(
+        'Good morning',
         color: Colors.white,
         top: true,
-      ));
-      // conv1
-    } else {
-      gameRef.add(TextPrompt(
-        "What's that you have there?!",
-        color: color,
-        top: false,
-      ));
-    }
+      ),
+    );
   }
 }
 
 class Lumberjack extends Npc with CollisionCallbacks {
   final Sprite sprite;
-
   Lumberjack(this.sprite, super.color, {super.position});
 
   @override
@@ -200,7 +192,7 @@ class Lumberjack extends Npc with CollisionCallbacks {
     if (gameRef.globs['has_fish'] == true &&
         gameRef.globs['has_bridge'] == false) {
       gameRef.add(TextPrompt(
-        "Good morning",
+        'Thanks, I will build a bridge for you',
         color: color,
         top: true,
       ));
@@ -210,7 +202,7 @@ class Lumberjack extends Npc with CollisionCallbacks {
       // conv1
     } else {
       gameRef.add(TextPrompt(
-        "I want fish",
+        'I want fish',
         color: Colors.white,
         top: false,
       ));
@@ -222,6 +214,7 @@ class Yarn extends Npc with CollisionCallbacks {
   final Sprite sprite;
   Yarn(this.sprite, super.color, {super.position});
 
+  @override
   Future<void> onLoad() async {
     super.onLoad();
     animation = SpriteAnimation.spriteList(
