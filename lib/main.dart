@@ -24,7 +24,7 @@ Map<String, bool> initialize_glob_vars() {
   map['has_bridge'] = false;
   map['has_fish'] = false;
   map['dog_moved'] = false;
-  map['gate_open'] = false;
+  map['gate_open'] = true;
   return map;
 }
 
@@ -47,13 +47,12 @@ class GalootGame extends FlameGame
     changeLevel(BWLevel(Vector2(5 * 16, 8 * 16)));
     camera.followComponent(player);
     TextPrompt startText = TextPrompt(
-//        "Once upon a time, a great, probably the greatest, most evil dog in the world, Dognald, didn't like that different colors mix. So he decided to use his magic haircut to steal all the colors and lock them away in three different balls of yarn that he hid around the planet. Legends state that if someone would find these balls of yarn and bring them together close to Dognalds magic haircut the spell would break and the world would once again thrive in a colorful world without borders.",
         "Once upon a time, a great, probably the greatest, most evil dog in the world, Dognald, didn't like that different colors mix. So he decided to use his magic haircut to steal all the colors and lock them away in three different balls of yarn that he hid around the planet. Legends state that if someone would find these balls of yarn and bring them together close to Dognalds magic haircut the spell would break and the world would once again thrive in a colorful world without borders.",
         color: Colors.white,
         top: false);
-    startText.position = Vector2(150, 50);
-    startText.size = Vector2(300, 500);
     add(startText);
+    startText.position = Vector2(10, 10);
+    startText.size = Vector2(300, 500);
   }
 
   @override

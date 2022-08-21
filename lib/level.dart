@@ -83,3 +83,9 @@ void startBgmMusic() {
   FlameAudio.bgm.initialize();
   FlameAudio.bgm.play('bg.mp3');
 }
+
+void startScaryMusic() {
+  FlameAudio.bgm.initialize();
+  FlameAudio.bgm.stop();
+  FlameAudio.bgm.play('scary_bg.wav');
+}

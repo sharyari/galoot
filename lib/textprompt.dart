@@ -22,7 +22,7 @@ class TextPrompt extends TextBoxComponent
           ),
           boxConfig: TextBoxConfig(
             maxWidth: 300,
-            timePerChar: 0.04,
+            timePerChar: 0.02,
             margins: const EdgeInsets.all(25),
             growingBox: false,
           ),

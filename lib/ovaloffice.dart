@@ -4,6 +4,8 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:galoot/assets.dart';
+import 'package:flame_audio/flame_audio.dart';
+
 import 'package:galoot/bwlevel.dart';
 import 'package:galoot/level.dart';
 import 'package:galoot/npc.dart';
@@ -18,6 +20,10 @@ class OvalOffice extends Level with CollisionCallbacks {
   @override
   Future<void> onLoad() async {
     size = Vector2(10 * 16, 35 * 16);
+    FlameAudio.bgm.initialize();
+    FlameAudio.bgm.stop();
+    FlameAudio.bgm.play('scary_bgm.wav');
+
     await super.onLoad();
   }
 }
