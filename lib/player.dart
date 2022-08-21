@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:galoot/level.dart';
 import 'package:galoot/npc.dart';
 import 'package:mini_sprite/mini_sprite.dart';
-import 'package:galoot/main.dart';
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with CollisionCallbacks, Tappable {
@@ -160,6 +159,11 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       return;
     }
     if (other is Npc) {
+      if (rng.nextBool()) {
+        mjau1.start();
+      } else {
+        mjau2.start();
+      }
       other.converse();
     }
 
