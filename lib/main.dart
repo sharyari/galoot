@@ -15,9 +15,16 @@ void main() {
   runApp(GameWidget(game: GalootGame()));
 }
 
+Map<String, bool> initialize_glob_vars() {
+  Map<String, bool> map = new Map();
+  map['has_bone'] = false;
+  return map;
+}
+
 class GalootGame extends FlameGame
     with HasCollisionDetection, HasDraggables, HasTappables {
   late Player player;
+  Map<String, bool> globs = initialize_glob_vars();
   @override
   Future<void> onLoad() async {
     //debugMode = true;
@@ -37,7 +44,13 @@ class GalootGame extends FlameGame
   @override
   void onTapDown(int _pointerId, TapDownInfo info) {
     super.onTapDown(_pointerId, info);
-    player.move(info.eventPosition.game);
+    // two tapdowns are triggered. The textbox has locked the cat, so unlock it
+    // and don't move (it would trigger another textbox!)
+    if (player.locked) {
+      player.locked = false;
+    } else {
+      player.move(info.eventPosition.game);
+    }
   }
 
   void changeLevel(Level level, Vector2 position) {

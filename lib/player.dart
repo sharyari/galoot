@@ -6,7 +6,7 @@ import 'package:flame/input.dart';
 import 'package:flame_audio/audio_pool.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:galoot/level.dart';
-
+import 'package:galoot/npc.dart';
 import 'dart:math';
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
@@ -16,6 +16,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   late AudioPool mjau2;
   late AudioPool angry;
   late Random rng = Random();
+  bool locked = false;
 
   Player(Vector2 pos) : super(size: Vector2(200, 200), anchor: Anchor.center) {
     setPosition(pos);
@@ -95,7 +96,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   void move(Vector2 clickPos) {
     Vector2 direction = clickPos - position;
     void onComplete() => {lastPosition = position.clone()};
-    if (children.query<MoveByEffect>().length > 0) {
+    if (children.query<MoveByEffect>().length > 0 || locked) {
       return;
     }
     if (direction.x.abs() > direction.y.abs()) {
@@ -155,7 +156,11 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     PositionComponent other,
   ) {
     if (other is Level) {
+      // level will fix it
       return;
+    }
+    if (other is Npc) {
+      other.converse();
     }
     super.onCollisionStart(intersectionPoint, other);
     children.query<MoveByEffect>().forEach((effect) {

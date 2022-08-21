@@ -24,7 +24,7 @@ class BlueLevel extends Level with CollisionCallbacks {
   Future<void> onLoad() async {
     size = Vector2(10 * 16, 35 * 16);
     super.onLoad();
-    add(GuardDog(position: Vector2(7 * 16, 29 * 16)));
+    add(GuardDog(position: Vector2(5 * 16, 29 * 16)));
   }
 
   @override
@@ -39,6 +39,7 @@ class BlueLevel extends Level with CollisionCallbacks {
     }
 
     if (other.position.y <= 20) {
+      // go north to BW
       removeFromParent();
       gameRef.changeLevel(BWLevel(), Vector2(10 * 16, 29 * 16)); // Todo
     }
