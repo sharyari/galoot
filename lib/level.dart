@@ -7,13 +7,13 @@ import 'package:flame_mini_sprite/flame_mini_sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:galoot/assets.dart';
 import 'package:galoot/main.dart';
-import 'package:galoot/player.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
 class Level extends PositionComponent with HasGameRef<GalootGame> {
   final String map;
   final String library;
   final Color color;
+  late final Map<String, Sprite> miscSprites;
   Level(this.map, this.library, this.color) : super(position: Vector2(0, 0));
 
   @override
@@ -21,6 +21,12 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
     final miniLibrary = MiniLibrary.fromDataString(library);
     add(RectangleHitbox(size: size));
     final sprites = await miniLibrary.toSprites(
+      color: color,
+      pixelSize: 1,
+    );
+
+    final assets = MiniLibrary.fromDataString(misc);
+    miscSprites = await assets.toSprites(
       color: color,
       pixelSize: 1,
     );

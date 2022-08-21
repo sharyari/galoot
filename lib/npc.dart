@@ -48,3 +48,38 @@ class GuardDog extends Npc with CollisionCallbacks {
     }
   }
 }
+
+class Grandpa extends Npc with CollisionCallbacks {
+  final Sprite sprite;
+  Grandpa(this.sprite, {super.position});
+
+  @override
+  Future<void> onLoad() async {
+    super.onLoad();
+    animation = SpriteAnimation.spriteList(
+      [
+        sprite,
+      ],
+      stepTime: 0.3,
+    );
+    size.add(Vector2(2, 2));
+  }
+
+  @override
+  void converse() {
+    if (gameRef.globs['has_bone'] == true) {
+      gameRef.add(TextPrompt(
+        "Good morning",
+        color: Colors.white,
+        top: true,
+      ));
+      // conv1
+    } else {
+      gameRef.add(TextPrompt(
+        "What's that you have there?!",
+        color: Colors.white,
+        top: false,
+      ));
+    }
+  }
+}
