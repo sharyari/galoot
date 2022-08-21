@@ -217,3 +217,37 @@ class Lumberjack extends Npc with CollisionCallbacks {
     }
   }
 }
+
+class Yarn extends Npc with CollisionCallbacks {
+  final Sprite sprite;
+  Yarn(this.sprite, super.color, {super.position});
+
+  Future<void> onLoad() async {
+    super.onLoad();
+    animation = SpriteAnimation.spriteList(
+      [
+        sprite,
+      ],
+      stepTime: 0.3,
+    );
+  }
+
+  @override
+  void converse() {
+    gameRef.add(
+      TextPrompt(
+        "Hooeeye! What a fun yarn ball!",
+        color: color,
+        top: false,
+      ),
+    );
+    if (color == Colors.red) {
+      gameRef.globs['has_red_yarn'] = true;
+    } else if (color == Colors.blue) {
+      gameRef.globs['has_blue_yarn'] = true;
+    } else if (color == Colors.green) {
+      gameRef.globs['has_green_yarn'] = true;
+    }
+    removeFromParent();
+  }
+}

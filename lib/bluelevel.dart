@@ -29,7 +29,7 @@ class BlueLevel extends Level with CollisionCallbacks {
       add(Fish(fish, color, position: Vector2(5 * 16, 33 * 16)));
     }
     if (yarn != null) {
-      add(Loot(sprite: yarn, position: Vector2(1 * 16 + 8, 33 * 16 + 8)));
+      add(Yarn(yarn, Colors.blue, position: Vector2(1 * 16 + 8, 33 * 16 + 8)));
     }
   }
 
