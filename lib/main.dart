@@ -31,7 +31,7 @@ class GalootGame extends FlameGame
   Map<String, bool> globs = initialize_glob_vars();
   @override
   Future<void> onLoad() async {
-    //debugMode = true;
+    debugMode = false;
     await Flame.images.loadAll([
       'vakthund.png',
       'katt1.png',
@@ -41,7 +41,7 @@ class GalootGame extends FlameGame
     player = Player(playerCat);
     add(player);
 
-    changeLevel(BWLevel(Vector2(15 * 16, 5 * 16)));
+    changeLevel(BWLevel(Vector2(1 * 16, 12 * 16)));
     camera.followComponent(player);
 //    add(TextPrompt("Hello world!", color: Colors.white, top: false));
   }

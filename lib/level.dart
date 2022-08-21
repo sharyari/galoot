@@ -59,12 +59,23 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
               ),
             )..add(
                 RectangleHitbox(size: Vector2(14, 14), position: Vector2(1, 1))
-                  ..collisionType = CollisionType.passive),
+                  ..collisionType = getCollisionType(sprite)),
           ),
         );
       }
     }
     gameRef.player.setAnimations(color);
+  }
+
+  CollisionType getCollisionType(Sprite sprite) {
+    if (sprite == mapSprites['carpet1'] ||
+        sprite == mapSprites['carpet2'] ||
+        sprite == mapSprites['carpet3'] ||
+        sprite == mapSprites['carpet4']) {
+      return CollisionType.inactive;
+    } else {
+      return CollisionType.passive;
+    }
   }
 }
 

@@ -10,6 +10,7 @@ import 'package:galoot/level.dart';
 import 'package:galoot/npc.dart';
 import 'package:galoot/player.dart';
 import 'package:galoot/redlevel.dart';
+import 'package:galoot/ovaloffice.dart';
 import 'package:galoot/textprompt.dart';
 
 import 'package:flame/effects.dart';
@@ -92,7 +93,7 @@ class BWLevel extends Level with CollisionCallbacks {
     if (other.position.y >= 29 * 16) {
       // south to blue
       removeFromParent();
-      gameRef.changeLevel(BlueLevel(Vector2(5 * 16, 0))); // Todo
+      gameRef.changeLevel(BlueLevel(Vector2(5 * 16, 0)));
     } else if (other.position.y <= 32) {
       // north to red
       if (!(gameRef.globs['has_cap'] == true)) {
@@ -110,14 +111,17 @@ class BWLevel extends Level with CollisionCallbacks {
         ));
       } else {
         removeFromParent();
-        gameRef.changeLevel(RedLevel(Vector2(8 * 16, 29 * 16))); // Todo
+        gameRef.changeLevel(RedLevel(Vector2(8 * 16, 29 * 16)));
       }
     } else if (other.position.x >= 19 * 16) {
       // east to green
       removeFromParent();
       final oldPlayerY = gameRef.player.position.y - 8;
-      gameRef.changeLevel(GreenLevel(Vector2(0, oldPlayerY))); // Todo
-
+      gameRef.changeLevel(GreenLevel(Vector2(0, oldPlayerY)));
+    } else if (other.position.x < 17) {
+      // oval office TODO: set to door
+      removeFromParent();
+      gameRef.changeLevel(OvalOffice(Vector2(19 * 16, 8 * 16)));
     }
   }
 }
