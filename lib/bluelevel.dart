@@ -21,8 +21,12 @@ class BlueLevel extends Level with CollisionCallbacks {
 
     final dog = super.miscSprites['dog'];
     final yarn = super.miscSprites['yarn'];
-    if (dog != null) {
-      add(GuardDog(dog, position: Vector2(5 * 16, 29 * 16)));
+    final fish = super.miscSprites['fish'];
+    if (dog != null && gameRef.globs['dog_moved'] == false) {
+      add(GuardDog(dog, color, position: Vector2(5 * 16, 29 * 16)));
+    }
+    if (fish != null && gameRef.globs['has_fish'] == false) {
+      add(Fish(fish, color, position: Vector2(5 * 16, 33 * 16)));
     }
     if (yarn != null) {
       add(Loot(sprite: yarn, position: Vector2(1 * 16 + 8, 33 * 16 + 8)));
