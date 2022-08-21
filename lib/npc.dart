@@ -15,6 +15,34 @@ class Npc extends SpriteAnimationComponent with HasGameRef<GalootGame> {
   }
 }
 
+class Bone extends Npc with CollisionCallbacks {
+  final Sprite sprite;
+  Bone(this.sprite, {super.position});
+
+  Future<void> onLoad() async {
+    super.onLoad();
+    animation = SpriteAnimation.spriteList(
+      [
+        sprite,
+      ],
+      stepTime: 0.3,
+    );
+  }
+
+  @override
+  void converse() {
+    gameRef.add(
+      TextPrompt(
+        "You found a bone!",
+        color: Colors.white,
+        top: false,
+      ),
+    );
+    gameRef.globs['has_bone'] = true;
+    removeFromParent();
+  }
+}
+
 class GuardDog extends Npc with CollisionCallbacks {
   final Sprite sprite;
   GuardDog(this.sprite, {super.position});

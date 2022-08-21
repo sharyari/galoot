@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
+import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:galoot/assets.dart';
 import 'package:galoot/bluelevel.dart';
@@ -13,9 +15,6 @@ import 'package:galoot/redlevel.dart';
 import 'package:galoot/ovaloffice.dart';
 import 'package:galoot/textprompt.dart';
 
-import 'package:flame/effects.dart';
-import 'package:flame/input.dart';
-import 'loot.dart';
 import 'objects.dart';
 
 class BWLevel extends Level with CollisionCallbacks {
@@ -45,7 +44,7 @@ class BWLevel extends Level with CollisionCallbacks {
       add(Lumberjack(lumberjack, position: Vector2(11 * 16, 11 * 16)));
     }
     if (bone != null) {
-      add(Loot(sprite: bone, position: Vector2(7 * 16, 16 * 26)));
+      add(Bone(bone, position: Vector2(7 * 16, 16 * 26)));
     }
     if (grandpa != null) {
       add(Grandpa(grandpa, position: Vector2(7 * 16, 8 * 16)));
