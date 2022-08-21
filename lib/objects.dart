@@ -19,3 +19,11 @@ class River extends Objects {
     await super.onLoad();
   }
 }
+
+class Door extends Objects {
+  Door({super.sprite, super.position});
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+  }
+}
