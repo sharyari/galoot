@@ -10,7 +10,10 @@ import 'package:galoot/level.dart';
 import 'package:galoot/npc.dart';
 import 'package:galoot/player.dart';
 import 'package:galoot/redlevel.dart';
+import 'package:galoot/textprompt.dart';
 
+import 'package:flame/effects.dart';
+import 'package:flame/input.dart';
 import 'loot.dart';
 import 'objects.dart';
 
@@ -92,8 +95,23 @@ class BWLevel extends Level with CollisionCallbacks {
       gameRef.changeLevel(BlueLevel(Vector2(5 * 16, 0))); // Todo
     } else if (other.position.y <= 32) {
       // north to red
-      removeFromParent();
-      gameRef.changeLevel(RedLevel(Vector2(8 * 16, 29 * 16))); // Todo
+      if (!(gameRef.globs['has_cap'] == true)) {
+        gameRef.add(TextPrompt(
+          "It's cold here! Let's find some clothes",
+          color: Colors.white,
+          top: false,
+        ));
+
+        // hack to keep player on map
+        gameRef.player.add(MoveByEffect(
+          Vector2(0, 16),
+          EffectController(duration: 0.2),
+//          onComplete: onComplete,
+        ));
+      } else {
+        removeFromParent();
+        gameRef.changeLevel(RedLevel(Vector2(8 * 16, 29 * 16))); // Todo
+      }
     } else if (other.position.x >= 19 * 16) {
       // east to green
       removeFromParent();
