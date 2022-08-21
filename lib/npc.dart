@@ -1,10 +1,9 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
+import 'package:flutter/material.dart';
 import 'package:galoot/main.dart';
 import 'package:galoot/textprompt.dart';
-import 'package:flutter/material.dart';
 
 class Npc extends SpriteAnimationComponent with HasGameRef<GalootGame> {
   Npc({super.position}) : super(size: Vector2(16, 16));
@@ -17,15 +16,15 @@ class Npc extends SpriteAnimationComponent with HasGameRef<GalootGame> {
 }
 
 class GuardDog extends Npc with CollisionCallbacks {
-  GuardDog({super.position});
+  final Sprite sprite;
+  GuardDog(this.sprite, {super.position});
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
     animation = SpriteAnimation.spriteList(
       [
-        Sprite(Flame.images.fromCache('vakthund.png')),
-        Sprite(Flame.images.fromCache('vakthund.png')),
+        sprite,
       ],
       stepTime: 0.3,
     );
