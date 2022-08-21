@@ -24,7 +24,7 @@ Map<String, bool> initialize_glob_vars() {
   map['has_bridge'] = false;
   map['has_fish'] = false;
   map['dog_moved'] = false;
-  map['gate_open'] = true;
+  map['gate_open'] = false;
   return map;
 }
 
