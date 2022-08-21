@@ -5,11 +5,10 @@ import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_mini_sprite/flame_mini_sprite.dart';
 import 'package:flutter/material.dart';
-import 'package:mini_sprite/mini_sprite.dart';
 import 'package:galoot/assets.dart';
 import 'package:galoot/main.dart';
 import 'package:galoot/player.dart';
-import 'package:galoot/npc.dart';
+import 'package:mini_sprite/mini_sprite.dart';
 
 class Level extends PositionComponent with HasGameRef<GalootGame> {
   final String map;
@@ -50,6 +49,7 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
         );
       }
     }
+    gameRef.player.setAnimations(color);
   }
 }
 

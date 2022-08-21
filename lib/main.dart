@@ -5,11 +5,9 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:galoot/assets.dart';
+import 'package:galoot/bwlevel.dart';
 import 'package:galoot/level.dart';
 import 'package:galoot/player.dart';
-import 'package:galoot/textprompt.dart';
-import 'package:galoot/npc.dart';
-import 'package:galoot/bwlevel.dart';
 
 void main() {
   runApp(GameWidget(game: GalootGame()));
@@ -34,7 +32,7 @@ class GalootGame extends FlameGame
     ]);
 
     camera.zoom = 2;
-    player = Player(Vector2(20 * 16, 10 * 16));
+    player = Player(Vector2(20 * 16, 10 * 16), playerCat);
     add(player);
     changeLevel(BWLevel(), Vector2(15 * 16, 20 * 16));
     camera.followComponent(player);
