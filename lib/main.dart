@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:galoot/assets.dart';
 import 'package:galoot/bwlevel.dart';
 import 'package:galoot/level.dart';
+import 'package:galoot/textprompt.dart';
 import 'package:galoot/player.dart';
 
 void main() {
@@ -43,9 +44,15 @@ class GalootGame extends FlameGame
     camera.zoom = 2;
     player = Player(playerCat);
     add(player);
-    changeLevel(BWLevel(Vector2(6 * 16, 8 * 16)));
+    changeLevel(BWLevel(Vector2(5 * 16, 8 * 16)));
     camera.followComponent(player);
-//    add(TextPrompt("Hello world!", color: Colors.white, top: false));
+    TextPrompt startText = TextPrompt(
+        "Once upon a time, stuff happend and we no longer have any color",
+        color: Colors.white,
+        top: false);
+    startText.position = Vector2(50, 50);
+    startText.size = Vector2(300, 300);
+    add(startText);
   }
 
   @override
