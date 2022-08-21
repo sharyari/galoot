@@ -31,7 +31,7 @@ Map<String, bool> initialize_glob_vars() {
 class GalootGame extends FlameGame
     with HasCollisionDetection, HasDraggables, HasTappables {
   late Player player;
-
+  late BWLevel currentLevel;
   Map<String, bool> globs = initialize_glob_vars();
   @override
   Future<void> onLoad() async {
@@ -72,6 +72,9 @@ class GalootGame extends FlameGame
       effect.removeFromParent();
     });
     add(level);
+    if (level is BWLevel) {
+      currentLevel = level;
+    }
     player.lastPosition = player.position;
     player.changeParent(level);
   }

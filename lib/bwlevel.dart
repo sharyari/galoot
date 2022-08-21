@@ -10,14 +10,15 @@ import 'package:galoot/bluelevel.dart';
 import 'package:galoot/greenlevel.dart';
 import 'package:galoot/level.dart';
 import 'package:galoot/npc.dart';
+import 'package:galoot/ovaloffice.dart';
 import 'package:galoot/player.dart';
 import 'package:galoot/redlevel.dart';
-import 'package:galoot/ovaloffice.dart';
 import 'package:galoot/textprompt.dart';
 
 import 'objects.dart';
 
 class BWLevel extends Level with CollisionCallbacks {
+  late Objects riverTile;
   BWLevel(Vector2 initialPlayerPosition)
       : super(
           blackWhiteWorld,
@@ -69,13 +70,20 @@ class BWLevel extends Level with CollisionCallbacks {
           ),
       );
     }
+
     if ((gameRef.globs['has_bridge']) == false) {
-      add(River(
-          sprite: mapSprites['river'], position: Vector2(17 * 16, 14 * 16)));
+      riverTile = River(
+          sprite: mapSprites['river'], position: Vector2(17 * 16, 14 * 16));
     } else {
-      add(River(
-          sprite: miscSprites['bridge'], position: Vector2(17 * 16, 14 * 16)));
+      riverTile = Bridge(
+          sprite: miscSprites['bridge'], position: Vector2(17 * 16, 14 * 16));
     }
+    add(riverTile);
+  }
+
+  void addBridge() {
+    add(Bridge(
+        sprite: miscSprites['bridge'], position: Vector2(17 * 16, 14 * 16)));
   }
 
   @override
