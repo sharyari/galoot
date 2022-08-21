@@ -1,10 +1,9 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
+import 'package:flutter/material.dart';
 import 'package:galoot/main.dart';
 import 'package:galoot/textprompt.dart';
-import 'package:flutter/material.dart';
 
 class Npc extends SpriteAnimationComponent with HasGameRef<GalootGame> {
   Npc({super.position}) : super(size: Vector2(16, 16));
@@ -17,15 +16,15 @@ class Npc extends SpriteAnimationComponent with HasGameRef<GalootGame> {
 }
 
 class GuardDog extends Npc with CollisionCallbacks {
-  GuardDog({super.position});
+  final Sprite sprite;
+  GuardDog(this.sprite, {super.position});
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
     animation = SpriteAnimation.spriteList(
       [
-        Sprite(Flame.images.fromCache('vakthund.png')),
-        Sprite(Flame.images.fromCache('vakthund.png')),
+        sprite,
       ],
       stepTime: 0.3,
     );
@@ -44,6 +43,41 @@ class GuardDog extends Npc with CollisionCallbacks {
       gameRef.add(TextPrompt(
         "Voof!! What's that you have there?!",
         color: Colors.blue,
+        top: false,
+      ));
+    }
+  }
+}
+
+class Grandpa extends Npc with CollisionCallbacks {
+  final Sprite sprite;
+  Grandpa(this.sprite, {super.position});
+
+  @override
+  Future<void> onLoad() async {
+    super.onLoad();
+    animation = SpriteAnimation.spriteList(
+      [
+        sprite,
+      ],
+      stepTime: 0.3,
+    );
+    size.add(Vector2(2, 2));
+  }
+
+  @override
+  void converse() {
+    if (gameRef.globs['has_bone'] == true) {
+      gameRef.add(TextPrompt(
+        "Good morning",
+        color: Colors.white,
+        top: true,
+      ));
+      // conv1
+    } else {
+      gameRef.add(TextPrompt(
+        "What's that you have there?!",
+        color: Colors.white,
         top: false,
       ));
     }
