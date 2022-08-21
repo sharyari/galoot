@@ -29,7 +29,8 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   @override
   Future<void> onLoad() async {
     size = Vector2(16, 16);
-    add(RectangleHitbox(size: Vector2(15, 15)));
+    add(RectangleHitbox(size: Vector2(14, 14), position: Vector2(1, 1)));
+
     current = PlayerState.idle;
     children.register<MoveByEffect>();
     mjau1 = await FlameAudio.createPool(
@@ -93,8 +94,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   void move(Vector2 clickPos) {
     Vector2 direction = clickPos - position;
-    void onComplete() =>
-        {lastPosition = position.clone(), current = PlayerState.idle};
+    void onComplete() => {lastPosition = position.clone()};
     if (children.query<MoveByEffect>().length > 0) {
       return;
     }
@@ -102,7 +102,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       if (direction.x > 0) {
         add(MoveByEffect(
           Vector2(16, 0),
-          EffectController(duration: 0.4),
+          EffectController(duration: 0.2),
           onComplete: onComplete,
         )); // right
         current = PlayerState.side;
@@ -112,7 +112,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       } else {
         add(MoveByEffect(
           Vector2(-16, 0),
-          EffectController(duration: 0.4),
+          EffectController(duration: 0.2),
           onComplete: onComplete,
         )); // right
         current = PlayerState.side;
@@ -124,14 +124,14 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       if (direction.y > 0) {
         add(MoveByEffect(
           Vector2(0, 16),
-          EffectController(duration: 0.4),
+          EffectController(duration: 0.2),
           onComplete: onComplete,
         )); // right
         current = PlayerState.down;
       } else {
         add(MoveByEffect(
           Vector2(0, -16),
-          EffectController(duration: 0.4),
+          EffectController(duration: 0.2),
           onComplete: onComplete,
         )); // right
         current = PlayerState.up;

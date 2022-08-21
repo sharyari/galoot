@@ -8,6 +8,7 @@ import 'package:galoot/assets.dart';
 import 'package:galoot/level.dart';
 import 'package:galoot/player.dart';
 import 'package:galoot/textprompt.dart';
+import 'package:galoot/npc.dart';
 
 void main() {
   runApp(GameWidget(game: GalootGame()));
@@ -19,10 +20,16 @@ class GalootGame extends FlameGame
   @override
   Future<void> onLoad() async {
     //debugMode = true;
+    await Flame.images.loadAll([
+      'vakthund.png',
+      'katt1.png',
+    ]);
+    add(GuardDog(position: Vector2(10 * 16, 15 * 16)));
+
     camera.zoom = 2;
-    player = Player(Vector2(25 * 16, 10 * 16));
+    player = Player(Vector2(20 * 16, 10 * 16));
     add(player);
-    changeLevel(BWLevel(), Vector2(10 * 16, 25 * 16));
+    changeLevel(BWLevel(), Vector2(18 * 16, 10 * 16));
     camera.followComponent(player);
 //    add(TextPrompt("Hello world!", color: Colors.white, top: false));
   }
@@ -34,10 +41,10 @@ class GalootGame extends FlameGame
   }
 
   void changeLevel(Level level, Vector2 position) {
-    add(level);
     player.children.query<MoveByEffect>().forEach((effect) {
       effect.removeFromParent();
     });
     player.setPosition(position);
+    add(level);
   }
 }
