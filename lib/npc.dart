@@ -162,7 +162,7 @@ class Grandpa extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        'Good morning',
+        'Ooh, my little Galoot. I so wish you could have been here when we still had colors!',
         color: Colors.white,
         top: false,
       ),
@@ -202,7 +202,7 @@ class Lumberjack extends Npc with CollisionCallbacks {
       // conv1
     } else {
       gameRef.add(TextPrompt(
-        'I want fish',
+        'I will gladly help you across the river, but I am to hungry to work!',
         color: Colors.white,
         top: false,
       ));
@@ -230,7 +230,7 @@ class Yarn extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        "Hooeeye! What a fun yarn ball!",
+        "Hooeeye! One of the magic yarn balls!!",
         color: color,
         top: false,
       ),
