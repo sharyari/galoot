@@ -24,12 +24,8 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   late MiniLibrary miniLibrary;
 
   Player(
-    Vector2 pos,
     this.library,
-  ) : super(size: Vector2(200, 200), anchor: Anchor.center) {
-    setPosition(pos);
-    lastPosition = pos;
-  }
+  ) : super(size: Vector2(200, 200), anchor: Anchor.center);
 
   void setPosition(Vector2 position) {
     this.position = position + Vector2(8, 8);

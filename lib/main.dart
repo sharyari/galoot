@@ -32,9 +32,10 @@ class GalootGame extends FlameGame
     ]);
 
     camera.zoom = 2;
-    player = Player(Vector2(20 * 16, 10 * 16), playerCat);
+    player = Player(playerCat);
     add(player);
-    changeLevel(BWLevel(), Vector2(15 * 16, 20 * 16));
+
+    changeLevel(BWLevel(Vector2(15 * 16, 5 * 16)));
     camera.followComponent(player);
 //    add(TextPrompt("Hello world!", color: Colors.white, top: false));
   }
@@ -51,11 +52,11 @@ class GalootGame extends FlameGame
     }
   }
 
-  void changeLevel(Level level, Vector2 position) {
+  void changeLevel(Level level) {
     player.children.query<MoveByEffect>().forEach((effect) {
       effect.removeFromParent();
     });
-    player.setPosition(position);
     add(level);
+    player.changeParent(level);
   }
 }
