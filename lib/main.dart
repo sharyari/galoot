@@ -9,6 +9,7 @@ import 'package:galoot/level.dart';
 import 'package:galoot/player.dart';
 import 'package:galoot/textprompt.dart';
 import 'package:galoot/npc.dart';
+import 'package:galoot/bwlevel.dart';
 
 void main() {
   runApp(GameWidget(game: GalootGame()));
@@ -24,12 +25,11 @@ class GalootGame extends FlameGame
       'vakthund.png',
       'katt1.png',
     ]);
-    add(GuardDog(position: Vector2(10 * 16, 15 * 16)));
 
     camera.zoom = 2;
     player = Player(Vector2(20 * 16, 10 * 16));
     add(player);
-    changeLevel(BWLevel(), Vector2(18 * 16, 10 * 16));
+    changeLevel(BWLevel(), Vector2(15 * 16, 20 * 16));
     camera.followComponent(player);
 //    add(TextPrompt("Hello world!", color: Colors.white, top: false));
   }
