@@ -256,7 +256,7 @@ class Dognald extends Npc with CollisionCallbacks {
 
   @override
   Future<void> onLoad() async {
-    add(RectangleHitbox(size: Vector2(14, 14), position: Vector2(1, 1))
+    add(RectangleHitbox(size: Vector2(80, 80), position: Vector2(1, 1))
       ..collisionType = CollisionType.passive);
     animation = SpriteAnimation.spriteList(
       [
