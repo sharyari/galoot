@@ -59,6 +59,7 @@ flutter:
     - assets/audio/default_mjau2.mp3
     - assets/audio/arg_mjau.mp3
     - assets/audio/scary_bgm.wav
+    - assets/audio/bg.mp3
 
   # To add assets to your application, add an assets section, like this:
   # assets:

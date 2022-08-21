@@ -39,7 +39,7 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
       pixelSize: 1,
     );
 
-//    startBgmMusic();
+    startBgmMusic();
 
 //    gameRef.camera.worldBounds = size.toRect();
 
@@ -69,5 +69,5 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
 
 void startBgmMusic() {
   FlameAudio.bgm.initialize();
-  FlameAudio.bgm.play('scary_bgm.wav');
+  FlameAudio.bgm.play('bg.mp3');
 }
