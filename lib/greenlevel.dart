@@ -25,7 +25,7 @@ class GreenLevel extends Level with CollisionCallbacks {
 
     if (yarn != null && gameRef.globs['has_green_yarn'] == false) {
       add(Yarn(yarn, Colors.green,
-          position: Vector2(15 * 16 + 8, 12 * 16 + 8)));
+          position: Vector2(12 * 16 + 8, 12 * 16 + 8)));
     }
     final trashcan = miscSprites['trashcan'];
     if (trashcan != null) {

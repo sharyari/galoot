@@ -164,7 +164,7 @@ class Grandpa extends Npc with CollisionCallbacks {
       TextPrompt(
         'Good morning',
         color: Colors.white,
-        top: true,
+        top: false,
       ),
     );
   }
@@ -216,7 +216,8 @@ class Yarn extends Npc with CollisionCallbacks {
 
   @override
   Future<void> onLoad() async {
-    super.onLoad();
+    await super.onLoad();
+    size.sub(Vector2(8, 8));
     animation = SpriteAnimation.spriteList(
       [
         sprite,
@@ -241,6 +242,10 @@ class Yarn extends Npc with CollisionCallbacks {
     } else if (color == Colors.green) {
       gameRef.globs['has_green_yarn'] = true;
     }
+    gameRef.globs['gate_open'] = gameRef.globs['has_red_yarn'] == true &&
+        gameRef.globs['has_green_yarn'] == true &&
+        gameRef.globs['has_blue_yarn'] == true;
+
     removeFromParent();
   }
 }

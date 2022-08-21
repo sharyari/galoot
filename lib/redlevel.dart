@@ -26,7 +26,7 @@ class RedLevel extends Level with CollisionCallbacks {
     final yarn = super.miscSprites['yarn'];
 
     if (yarn != null && gameRef.globs['has_red_yarn'] == false) {
-      add(Yarn(yarn, Colors.red, position: Vector2(15 * 16 + 8, 12 * 16 + 8)));
+      add(Yarn(yarn, Colors.red, position: Vector2(5 * 16 + 8, 5 * 16 + 8)));
     }
   }
 
