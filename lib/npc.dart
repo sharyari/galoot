@@ -35,7 +35,7 @@ class Fish extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        "You found a fish!",
+        "Tasty!! But I'm not hungry, who might want it?",
         color: color,
         top: false,
       ),
@@ -64,7 +64,7 @@ class Trashcan extends Npc with CollisionCallbacks {
     if (gameRef.globs['has_cap'] == false) {
       gameRef.add(
         TextPrompt(
-          "You found a cap!",
+          "A cap! That will keep me warm in the winter",
           color: color,
           top: false,
         ),
@@ -92,7 +92,7 @@ class Bone extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        'You found a bone!',
+        "A bone? Someone must have lost it!",
         color: color,
         top: false,
       ),
@@ -162,7 +162,7 @@ class Grandpa extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        'Good morning',
+        'Ooh, my little Galoot. I so wish you could have been here when we still had colors!',
         color: Colors.white,
         top: false,
       ),
@@ -202,7 +202,7 @@ class Lumberjack extends Npc with CollisionCallbacks {
       // conv1
     } else {
       gameRef.add(TextPrompt(
-        'I want fish',
+        'I will gladly help you across the river, but I am to hungry to work!',
         color: Colors.white,
         top: false,
       ));
@@ -230,7 +230,7 @@ class Yarn extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        "Hooeeye! What a fun yarn ball!",
+        "Hooeeye! One of the magic yarn balls!!",
         color: color,
         top: false,
       ),
