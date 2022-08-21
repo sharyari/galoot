@@ -41,7 +41,7 @@ class BWLevel extends Level with CollisionCallbacks {
     if (lumberjack != null) {
       add(Lumberjack(lumberjack, color, position: Vector2(11 * 16, 11 * 16)));
     }
-    if (bone != null) {
+    if (bone != null && gameRef.globs['has_bone'] == false) {
       add(Bone(bone, color, position: Vector2(3 * 16, 16 * 25)));
     }
     if (grandpa != null) {
@@ -66,6 +66,11 @@ class BWLevel extends Level with CollisionCallbacks {
               ..collisionType = CollisionType.passive,
           ),
       );
+    }
+
+    if ((gameRef.globs['gate_open']) == false) {
+      add(Gate(
+          sprite: mapSprites['fence_1'], position: Vector2(1 * 16, 15 * 17)));
     }
 
     if ((gameRef.globs['has_bridge']) == false) {

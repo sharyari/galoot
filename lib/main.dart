@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:galoot/assets.dart';
 import 'package:galoot/bwlevel.dart';
 import 'package:galoot/level.dart';
-import 'package:galoot/textprompt.dart';
 import 'package:galoot/player.dart';
+import 'package:galoot/textprompt.dart';
 
 void main() {
   runApp(GameWidget(game: GalootGame()));
@@ -20,11 +20,11 @@ Map<String, bool> initialize_glob_vars() {
   map['has_blue_yarn'] = false;
   map['has_red_yarn'] = false;
   map['has_green_yarn'] = false;
-  map['has_rod'] = false;
   map['has_cap'] = false;
-  map['has_bridge'] = true;
+  map['has_bridge'] = false;
   map['has_fish'] = false;
   map['dog_moved'] = false;
+  map['gate_open'] = false;
   return map;
 }
 

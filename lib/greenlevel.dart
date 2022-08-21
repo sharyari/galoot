@@ -21,12 +21,11 @@ class GreenLevel extends Level with CollisionCallbacks {
   Future<void> onLoad() async {
     size = Vector2(20 * 16, 30 * 16);
     await super.onLoad();
-
     final yarn = super.miscSprites['yarn'];
 
-    if (yarn != null) {
+    if (yarn != null && gameRef.globs['has_green_yarn'] == false) {
       add(Yarn(yarn, Colors.green,
-          position: Vector2(15 * 16 + 8, 12 * 16 + 8)));
+          position: Vector2(12 * 16 + 8, 12 * 16 + 8)));
     }
     final trashcan = miscSprites['trashcan'];
     if (trashcan != null) {

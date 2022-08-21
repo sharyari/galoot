@@ -9,8 +9,6 @@ import 'package:galoot/level.dart';
 import 'package:galoot/npc.dart';
 import 'package:galoot/player.dart';
 
-import 'loot.dart';
-
 class BlueLevel extends Level with CollisionCallbacks {
   BlueLevel(Vector2 initialPlayerPosition)
       : super(blueWorld, collection, Colors.blue, initialPlayerPosition);
@@ -28,7 +26,7 @@ class BlueLevel extends Level with CollisionCallbacks {
     if (fish != null && gameRef.globs['has_fish'] == false) {
       add(Fish(fish, color, position: Vector2(5 * 16, 33 * 16)));
     }
-    if (yarn != null) {
+    if (yarn != null && gameRef.globs['has_blue_yarn'] == false) {
       add(Yarn(yarn, Colors.blue, position: Vector2(1 * 16 + 8, 33 * 16 + 8)));
     }
   }

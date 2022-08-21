@@ -37,3 +37,11 @@ class Door extends Objects {
     await super.onLoad();
   }
 }
+
+class Gate extends Objects {
+  Gate({super.sprite, super.position});
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+  }
+}
