@@ -1,13 +1,15 @@
+import 'dart:math';
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
-import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
 import 'package:flame_audio/audio_pool.dart';
 import 'package:flame_audio/flame_audio.dart';
+import 'package:flame_mini_sprite/flame_mini_sprite.dart';
+import 'package:flutter/material.dart';
 import 'package:galoot/level.dart';
-
-import 'dart:math';
+import 'package:mini_sprite/mini_sprite.dart';
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with CollisionCallbacks, Tappable {
@@ -16,8 +18,13 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   late AudioPool mjau2;
   late AudioPool angry;
   late Random rng = Random();
+  final String library;
+  late MiniLibrary miniLibrary;
 
-  Player(Vector2 pos) : super(size: Vector2(200, 200), anchor: Anchor.center) {
+  Player(
+    Vector2 pos,
+    this.library,
+  ) : super(size: Vector2(200, 200), anchor: Anchor.center) {
     setPosition(pos);
     lastPosition = pos;
   }
@@ -28,6 +35,8 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   @override
   Future<void> onLoad() async {
+    miniLibrary = MiniLibrary.fromDataString(library);
+
     size = Vector2(16, 16);
     add(RectangleHitbox(size: Vector2(14, 14), position: Vector2(1, 1)));
 
@@ -40,52 +49,45 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     );
     mjau2 = await AudioPool.create('audio/default_mjau2.mp3', maxPlayers: 10);
     angry = await AudioPool.create('audio/arg_mjau.mp3', maxPlayers: 10);
+  }
 
-    await Flame.images.loadAll([
-      "katt1.png",
-      "katt2.png",
-      "katt3.png",
-      "kattbak1.png",
-      "kattbak2.png",
-      "kattbak3.png",
-      "kattfram1.png",
-      "kattfram2.png",
-      "kattfram3.png",
-      "nykatt1.png",
-      "nykatt2.png",
-      "nykatt3.png",
-    ]);
+  Future<void> setAnimations(Color color) async {
+    final sprites = await miniLibrary.toSprites(
+      color: color,
+      pixelSize: 1,
+    );
+
     animations = {
       PlayerState.side: SpriteAnimation.spriteList(
         [
-          Sprite(Flame.images.fromCache("nykatt1.png")),
-          Sprite(Flame.images.fromCache("nykatt2.png")),
-          Sprite(Flame.images.fromCache("nykatt1.png")),
-          Sprite(Flame.images.fromCache("nykatt3.png")),
+          sprites['cat_side_1']!,
+          sprites['cat_side_2']!,
+          sprites['cat_side_1']!,
+          sprites['cat_side_3']!,
         ],
-        stepTime: 0.3,
+        stepTime: 0.2,
       ),
       PlayerState.idle: SpriteAnimation.spriteList(
         [
-          Sprite(Flame.images.fromCache("nykatt1.png")),
+          sprites['cat_side_1']!,
         ],
         stepTime: 0.2,
       ),
       PlayerState.up: SpriteAnimation.spriteList(
         [
-          Sprite(Flame.images.fromCache("kattbak1.png")),
-          Sprite(Flame.images.fromCache("kattbak2.png")),
-          Sprite(Flame.images.fromCache("kattbak1.png")),
-          Sprite(Flame.images.fromCache("kattbak3.png")),
+          sprites['cat_back_1']!,
+          sprites['cat_back_2']!,
+          sprites['cat_back_1']!,
+          sprites['cat_back_3']!,
         ],
         stepTime: 0.2,
       ),
       PlayerState.down: SpriteAnimation.spriteList(
         [
-          Sprite(Flame.images.fromCache("kattfram3.png")),
-          Sprite(Flame.images.fromCache("kattfram1.png")),
-          Sprite(Flame.images.fromCache("kattfram3.png")),
-          Sprite(Flame.images.fromCache("kattfram2.png"))
+          sprites['cat_front_1']!,
+          sprites['cat_front_2']!,
+          sprites['cat_front_1']!,
+          sprites['cat_front_3']!,
         ],
         stepTime: 0.2,
       )

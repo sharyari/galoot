@@ -6,9 +6,8 @@ import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:galoot/assets.dart';
 import 'package:galoot/level.dart';
-import 'package:galoot/player.dart';
-import 'package:galoot/textprompt.dart';
 import 'package:galoot/npc.dart';
+import 'package:galoot/player.dart';
 
 void main() {
   runApp(GameWidget(game: GalootGame()));
@@ -27,7 +26,7 @@ class GalootGame extends FlameGame
     add(GuardDog(position: Vector2(10 * 16, 15 * 16)));
 
     camera.zoom = 2;
-    player = Player(Vector2(20 * 16, 10 * 16));
+    player = Player(Vector2(20 * 16, 10 * 16), playerCat);
     add(player);
     changeLevel(BWLevel(), Vector2(18 * 16, 10 * 16));
     camera.followComponent(player);
