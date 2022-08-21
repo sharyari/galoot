@@ -14,6 +14,7 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
   final String library;
   final Color color;
   final Vector2 initialPlayerPosition;
+  late final Map<String, Sprite> mapSprites;
   Level(
     this.map,
     this.library,
@@ -28,7 +29,7 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
     gameRef.player.setPosition(initialPlayerPosition);
     gameRef.player.locked = false;
     add(RectangleHitbox(size: size));
-    final sprites = await miniLibrary.toSprites(
+    mapSprites = await miniLibrary.toSprites(
       color: color,
       pixelSize: 1,
     );
@@ -45,7 +46,7 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
 
     final miniMap = MiniMap.fromDataString(map);
     for (final entry in miniMap.objects.entries) {
-      final sprite = sprites[entry.value['sprite']];
+      final sprite = mapSprites[entry.value['sprite']];
       if (sprite != null) {
         unawaited(
           add(

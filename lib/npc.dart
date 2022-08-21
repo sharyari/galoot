@@ -83,3 +83,57 @@ class Grandpa extends Npc with CollisionCallbacks {
     }
   }
 }
+
+class Trashcan extends Npc with CollisionCallbacks {
+  final Sprite sprite;
+
+  Trashcan(this.sprite, {super.position});
+
+  @override
+  Future<void> onLoad() async {
+    super.onLoad();
+    animation = SpriteAnimation.spriteList(
+      [
+        sprite,
+      ],
+      stepTime: 0.3,
+    );
+  }
+}
+
+class Lumberjack extends Npc with CollisionCallbacks {
+  final Sprite sprite;
+
+  Lumberjack(this.sprite, {super.position});
+
+  @override
+  Future<void> onLoad() async {
+    add(RectangleHitbox(size: Vector2(46, 46), position: Vector2(1, 1))
+      ..collisionType = CollisionType.passive);
+    animation = SpriteAnimation.spriteList(
+      [
+        sprite,
+      ],
+      stepTime: 0.3,
+    );
+    size.add(Vector2(32, 32));
+  }
+
+  @override
+  void converse() {
+    if (gameRef.globs['has_fish'] == true) {
+      gameRef.add(TextPrompt(
+        "Good morning",
+        color: Colors.white,
+        top: true,
+      ));
+      // conv1
+    } else {
+      gameRef.add(TextPrompt(
+        "I want fish",
+        color: Colors.white,
+        top: false,
+      ));
+    }
+  }
+}

@@ -12,6 +12,7 @@ import 'package:galoot/player.dart';
 import 'package:galoot/redlevel.dart';
 
 import 'loot.dart';
+import 'objects.dart';
 
 class BWLevel extends Level with CollisionCallbacks {
   BWLevel(Vector2 initialPlayerPosition)
@@ -31,8 +32,16 @@ class BWLevel extends Level with CollisionCallbacks {
     final treehouseTop = miscSprites['treehouse_top'];
     final treehouseBottom = miscSprites['treehouse_bottom'];
     final bone = miscSprites['bone'];
+    final lumberjack = miscSprites['lumberjack'];
+    final trashcan = miscSprites['trashcan'];
+    if (trashcan != null) {
+      add(Trashcan(trashcan, position: Vector2(7 * 16, 16 * 25)));
+    }
+    if (lumberjack != null) {
+      add(Lumberjack(lumberjack, position: Vector2(11 * 16, 11 * 16)));
+    }
     if (bone != null) {
-      add(Loot(sprite: bone, position: Vector2(5 * 16, 23 * 16)));
+      add(Loot(sprite: bone, position: Vector2(7 * 16, 16 * 26)));
     }
     if (grandpa != null) {
       add(Grandpa(grandpa, position: Vector2(7 * 16, 8 * 16)));
@@ -56,6 +65,13 @@ class BWLevel extends Level with CollisionCallbacks {
               ..collisionType = CollisionType.passive,
           ),
       );
+    }
+    if ((gameRef.globs['has_bridge']) == false) {
+      add(River(
+          sprite: mapSprites['river'], position: Vector2(17 * 16, 14 * 16)));
+    } else {
+      add(River(
+          sprite: miscSprites['bridge'], position: Vector2(17 * 16, 14 * 16)));
     }
   }
 

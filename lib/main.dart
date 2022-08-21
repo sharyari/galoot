@@ -16,6 +16,12 @@ void main() {
 Map<String, bool> initialize_glob_vars() {
   Map<String, bool> map = new Map();
   map['has_bone'] = false;
+  map['has_blue_yarn'] = false;
+  map['has_red_yarn'] = false;
+  map['has_green_yarn'] = false;
+  map['has_rod'] = false;
+  map['has_cap'] = false;
+  map['has_bridge'] = false;
   return map;
 }
 
@@ -57,6 +63,7 @@ class GalootGame extends FlameGame
       effect.removeFromParent();
     });
     add(level);
+    player.lastPosition = player.position;
     player.changeParent(level);
   }
 }
