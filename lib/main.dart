@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:galoot/assets.dart';
 import 'package:galoot/bwlevel.dart';
 import 'package:galoot/level.dart';
+import 'package:flame_audio/flame_audio.dart';
+
 import 'package:galoot/player.dart';
 import 'package:galoot/textprompt.dart';
 
@@ -24,7 +26,8 @@ Map<String, bool> initialize_glob_vars() {
   map['has_bridge'] = false;
   map['has_fish'] = false;
   map['dog_moved'] = false;
-  map['gate_open'] = true;
+  map['gate_open'] = false;
+  map['game_finished'] = false;
   return map;
 }
 
@@ -53,6 +56,7 @@ class GalootGame extends FlameGame
     add(startText);
     startText.position = Vector2(10, 10);
     startText.size = Vector2(300, 500);
+    startBgmMusic();
   }
 
   @override
@@ -77,5 +81,10 @@ class GalootGame extends FlameGame
     }
     player.lastPosition = player.position;
     player.changeParent(level);
+  }
+
+  void startBgmMusic() {
+    FlameAudio.bgm.initialize();
+    FlameAudio.bgm.play('bg.mp3', volume: 0.2);
   }
 }

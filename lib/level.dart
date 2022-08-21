@@ -40,8 +40,6 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
       pixelSize: 1,
     );
 
-    startBgmMusic();
-
 //    gameRef.camera.worldBounds = size.toRect();
 
     final miniMap = MiniMap.fromDataString(map);
@@ -77,11 +75,6 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
       return CollisionType.passive;
     }
   }
-}
-
-void startBgmMusic() {
-  FlameAudio.bgm.initialize();
-  FlameAudio.bgm.play('bg.mp3');
 }
 
 void startScaryMusic() {

@@ -202,7 +202,7 @@ class Lumberjack extends Npc with CollisionCallbacks {
       // conv1
     } else {
       gameRef.add(TextPrompt(
-        'I will gladly help you across the river, but I am to hungry to work!',
+        'I will gladly help you across the river, but I am too hungry to work!',
         color: Colors.white,
         top: false,
       ));
@@ -271,10 +271,12 @@ class Dognald extends Npc with CollisionCallbacks {
   void converse() {
     gameRef.add(
       TextPrompt(
-        'I am Dognald',
+        'Covfefe!? Baad! Oh no! You have the magic balls?! '
+        'All my semi-hard work is undone! Curse you!',
         color: color,
-        top: false,
+        top: true,
       ),
     );
+    gameRef.globs['game_finished'] = true;
   }
 }

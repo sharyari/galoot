@@ -7,6 +7,7 @@ import 'package:flame/input.dart';
 import 'package:flame_audio/audio_pool.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_mini_sprite/flame_mini_sprite.dart';
+
 import 'package:flutter/material.dart';
 import 'package:galoot/level.dart';
 import 'package:galoot/npc.dart';
@@ -102,7 +103,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       if (direction.x > 0) {
         add(MoveByEffect(
           Vector2(16, 0),
-          EffectController(duration: 0.2),
+          EffectController(duration: 0.15),
           onComplete: onComplete,
         )); // right
         current = PlayerState.side;
@@ -112,7 +113,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       } else {
         add(MoveByEffect(
           Vector2(-16, 0),
-          EffectController(duration: 0.2),
+          EffectController(duration: 0.15),
           onComplete: onComplete,
         )); // right
         current = PlayerState.side;
@@ -124,14 +125,14 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       if (direction.y > 0) {
         add(MoveByEffect(
           Vector2(0, 16),
-          EffectController(duration: 0.2),
+          EffectController(duration: 0.15),
           onComplete: onComplete,
         )); // right
         current = PlayerState.down;
       } else {
         add(MoveByEffect(
           Vector2(0, -16),
-          EffectController(duration: 0.2),
+          EffectController(duration: 0.15),
           onComplete: onComplete,
         )); // right
         current = PlayerState.up;

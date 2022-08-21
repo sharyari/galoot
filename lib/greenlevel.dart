@@ -29,7 +29,7 @@ class GreenLevel extends Level with CollisionCallbacks {
     }
     final trashcan = miscSprites['trashcan'];
     if (trashcan != null) {
-      add(Trashcan(trashcan, color, position: Vector2(10 * 16, 16 * 25)));
+      add(Trashcan(trashcan, color, position: Vector2(10 * 16, 16 * 24)));
     }
   }
 
@@ -39,7 +39,6 @@ class GreenLevel extends Level with CollisionCallbacks {
     PositionComponent other,
   ) {
     super.onCollisionStart(intersectionPoint, other);
-    print("bwlevel collision");
 
     if (!(other is Player)) {
       return;
