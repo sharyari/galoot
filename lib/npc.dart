@@ -197,12 +197,16 @@ class Lumberjack extends Npc with CollisionCallbacks {
 
   @override
   void converse() {
-    if (gameRef.globs['has_fish'] == true) {
+    if (gameRef.globs['has_fish'] == true &&
+        gameRef.globs['has_bridge'] == false) {
       gameRef.add(TextPrompt(
         "Good morning",
         color: color,
         top: true,
       ));
+      gameRef.currentLevel.riverTile.removeFromParent();
+      gameRef.currentLevel.addBridge();
+      gameRef.globs['has_bridge'] = true;
       // conv1
     } else {
       gameRef.add(TextPrompt(
