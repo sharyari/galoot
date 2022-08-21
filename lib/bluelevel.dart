@@ -14,12 +14,8 @@ import 'package:galoot/level.dart';
 import 'package:galoot/bwlevel.dart';
 
 class BlueLevel extends Level with CollisionCallbacks {
-  BlueLevel()
-      : super(
-          blueWorld,
-          collection,
-          Colors.blue,
-        );
+  BlueLevel(Vector2 initialPlayerPosition)
+      : super(blueWorld, collection, Colors.blue, initialPlayerPosition);
   @override
   Future<void> onLoad() async {
     size = Vector2(10 * 16, 35 * 16);
@@ -33,6 +29,7 @@ class BlueLevel extends Level with CollisionCallbacks {
     PositionComponent other,
   ) {
     super.onCollisionStart(intersectionPoint, other);
+    print("bwlevel collision");
 
     if (!(other is Player)) {
       return;
@@ -41,7 +38,7 @@ class BlueLevel extends Level with CollisionCallbacks {
     if (other.position.y <= 20) {
       // go north to BW
       removeFromParent();
-      gameRef.changeLevel(BWLevel(), Vector2(10 * 16, 29 * 16)); // Todo
+      gameRef.changeLevel(BWLevel(Vector2(8 * 16, 29 * 16))); // Todo
     }
   }
 }

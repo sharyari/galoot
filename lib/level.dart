@@ -14,11 +14,19 @@ class Level extends PositionComponent with HasGameRef<GalootGame> {
   final String map;
   final String library;
   final Color color;
-  Level(this.map, this.library, this.color) : super(position: Vector2(0, 0));
+  final Vector2 initialPlayerPosition;
+  Level(
+    this.map,
+    this.library,
+    this.color,
+    this.initialPlayerPosition,
+  ) : super(position: Vector2(0, 0));
 
   @override
   Future<void> onLoad() async {
     final miniLibrary = MiniLibrary.fromDataString(library);
+    gameRef.player.setPosition(initialPlayerPosition);
+    gameRef.player.locked = false;
     add(RectangleHitbox(size: size));
     final sprites = await miniLibrary.toSprites(
       color: color,

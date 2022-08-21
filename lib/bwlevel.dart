@@ -16,11 +16,12 @@ import 'package:galoot/greenlevel.dart';
 import 'package:galoot/bluelevel.dart';
 
 class BWLevel extends Level with CollisionCallbacks {
-  BWLevel()
+  BWLevel(Vector2 initialPlayerPosition)
       : super(
           blackWhiteWorld,
           collection,
           Colors.white,
+          initialPlayerPosition,
         );
 
   @override
@@ -36,6 +37,7 @@ class BWLevel extends Level with CollisionCallbacks {
     PositionComponent other,
   ) {
     super.onCollisionStart(intersectionPoint, other);
+    print("bwlevel collision");
 
     if (!(other is Player)) {
       return;
@@ -43,16 +45,16 @@ class BWLevel extends Level with CollisionCallbacks {
     if (other.position.y >= 29 * 16) {
       // south to blue
       removeFromParent();
-      gameRef.changeLevel(BlueLevel(), Vector2(5 * 16, 0)); // Todo
-    } else if (other.position.y <= 30 && other.position.x > 7 * 16) {
+      gameRef.changeLevel(BlueLevel(Vector2(5 * 16, 0))); // Todo
+    } else if (other.position.y <= 32) {
       // north to red
       removeFromParent();
-      gameRef.changeLevel(RedLevel(), Vector2(8 * 16, 29 * 16)); // Todo
+      gameRef.changeLevel(RedLevel(Vector2(8 * 16, 29 * 16))); // Todo
     } else if (other.position.x >= 19 * 16) {
       // east to green
       removeFromParent();
       final oldPlayerY = gameRef.player.position.y - 8;
-      gameRef.changeLevel(GreenLevel(), Vector2(0, oldPlayerY)); // Todo
+      gameRef.changeLevel(GreenLevel(Vector2(0, oldPlayerY))); // Todo
 
     }
   }
