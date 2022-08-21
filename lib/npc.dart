@@ -194,7 +194,7 @@ class Lumberjack extends Npc with CollisionCallbacks {
       gameRef.add(TextPrompt(
         'Thanks, I will build a bridge for you',
         color: color,
-        top: true,
+        top: false,
       ));
       gameRef.currentLevel.riverTile.removeFromParent();
       gameRef.currentLevel.addBridge();
@@ -247,5 +247,34 @@ class Yarn extends Npc with CollisionCallbacks {
         gameRef.globs['has_blue_yarn'] == true;
 
     removeFromParent();
+  }
+}
+
+class Dognald extends Npc with CollisionCallbacks {
+  final Sprite sprite;
+  Dognald(this.sprite, super.color, {super.position});
+
+  @override
+  Future<void> onLoad() async {
+    add(RectangleHitbox(size: Vector2(14, 14), position: Vector2(1, 1))
+      ..collisionType = CollisionType.passive);
+    animation = SpriteAnimation.spriteList(
+      [
+        sprite,
+      ],
+      stepTime: 0.3,
+    );
+    size.add(Vector2(32, 32));
+  }
+
+  @override
+  void converse() {
+    gameRef.add(
+      TextPrompt(
+        'I am Dognald',
+        color: color,
+        top: false,
+      ),
+    );
   }
 }
