@@ -20,8 +20,9 @@ class GreenLevel extends Level with CollisionCallbacks {
   @override
   Future<void> onLoad() async {
     size = Vector2(20 * 16, 30 * 16);
-    final yarn = super.miscSprites['yarn'];
     await super.onLoad();
+
+    final yarn = super.miscSprites['yarn'];
 
     if (yarn != null) {
       add(Yarn(yarn, Colors.green,
